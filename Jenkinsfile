@@ -21,10 +21,19 @@ pipeline {
         }
 
 
-        stage ('Deployment Stage') {
+        stage ('Packaging Stage') {
             steps {
                 withMaven(maven : 'maven_3_5_0') {
                     bat 'mvn package'
+                }
+            }
+        }
+        
+        
+        stage ('Deployment Stage') {
+            steps {
+                withMaven(maven : 'maven_3_5_0') {
+                    sh 'mvn deploy'
                 }
             }
         }
